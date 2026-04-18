@@ -1,0 +1,11 @@
+services:
+  db:
+    build: ./database
+    # ports
+    # volumes
+  frontend:
+    build: ./frontend
+    # ports
+  backend:
+    build: ./backend
+    #ports
