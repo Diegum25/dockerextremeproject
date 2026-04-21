@@ -7,3 +7,5 @@ WORKDIR /www/frontend
 COPY . .
 
 # get requirements
+
+# npm run dev

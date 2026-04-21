@@ -2,12 +2,12 @@ FROM python:alpine
 
 WORKDIR /www/backend
 
-# expose ports
+EXPOSE 5000
 
 COPY . .
 
-# get requirements
+RUN pip install -r requirements.txt
 
-# set up env
+# set up envs
 
-#run flask
+CMD flask --app main run -p 5000 -h 0.0.0.0
