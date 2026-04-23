@@ -5,7 +5,9 @@
 
 IMPORTANT='\e[1m\e[7m' # Bold Invert
 SUCCESS="\e[1m\e[37m\e[42m" # Bold White GreenBG
-MISSTAKE="\e[1m\e[37m\e[101m" # Bold White GreenBG
+MISSTAKE="\e[1m\e[37m\e[101m" # Bold White RedBG
+BLINK="\e[5m" # Blink idk how to make it stop though
+
 NC='\e[0m' # Reset
 
 DEVNULL=/dev/null
@@ -29,24 +31,41 @@ build backend
 build frontend
 build database
 
+echo
+
 echo "Launching containers"
 
-echo -n "Launching backend... "
+echo "Launching backend... "
 docker run -p5000:5000 --rm --name "extreme_backend" -d extreme_backend:latest > $DEVNULL
 
-echo -n "Launching frontend... "
+echo "Launching frontend... "
 docker run -p3000:3000 --rm --name "extreme_frontend" -d extreme_frontend:latest > $DEVNULL
 
-echo -n "Launching database... "
+echo "Launching database... "
 docker run --rm --name "extreme_database" -d extreme_database:latest > $DEVNULL
 
-trap : SIGINT
+echo
+
+STOPING=0
+
+dockerStop(){
+    trap : SIGINT # <- not working
+    echo -n -e "\n${BLINK}Stoping...${NC} "
+    docker stop extreme_backend extreme_database extreme_frontend > $DEVNULL
+    echo -e "${SUCCESS}Done${NC}"
+    STOPING=1
+}
+
+trap dockerStop SIGINT
 
 echo "Server is ready"
 echo "CTRL+C to stop"
-echo "CTRL+Z to stop fr smh ts pmo son"
 
-while :
+echo 
+
+docker container ls
+
+while [ $STOPING -ne 1 ]
 do
     sleep 1
 done
