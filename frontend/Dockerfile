@@ -2,10 +2,10 @@ FROM node:alpine
 
 WORKDIR /www/frontend
 
-# expose ports
+EXPOSE 3000
 
 COPY . .
 
-# get requirements
+RUN npm install
 
-# npm run dev
+CMD npm run dev
