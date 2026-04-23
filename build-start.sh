@@ -35,7 +35,7 @@ echo -n "Launching backend... "
 docker run -p5000:5000 --rm --name "extreme_backend" -d extreme_backend:latest > $DEVNULL
 
 echo -n "Launching frontend... "
-docker run -p8080:8080 --rm --name "extreme_frontend" -d extreme_frontend:latest > $DEVNULL
+docker run -p3000:3000 --rm --name "extreme_frontend" -d extreme_frontend:latest > $DEVNULL
 
 echo -n "Launching database... "
 docker run --rm --name "extreme_database" -d extreme_database:latest > $DEVNULL
