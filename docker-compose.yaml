@@ -21,7 +21,6 @@ services:
     environment:
       - EXTREME_BACKEND_PORT=${EXTREME_BACKEND_PORT}
       - EXTREME_BUILDER_PORT=${EXTREME_BUILDER_PORT}
-      - EXTREME_RUNNER_LAUNCHER_PORT=${EXTREME_RUNNER_LAUNCHER_PORT}
   builder:
     build: 
       context: builder
