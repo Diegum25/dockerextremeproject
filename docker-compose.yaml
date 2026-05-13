@@ -1,0 +1,10 @@
+services:
+  frontend:
+    build: frontend
+    container-name: extreme_frontend
+  backend:
+    build: backend
+    container-name: extrene_backend
+  builder:
+    build: builder
+    container-name: extreme_builder
