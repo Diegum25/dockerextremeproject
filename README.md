@@ -9,12 +9,10 @@ Code could be rated with both speed of upload and output.
 ## Container Setup
 ``` pre
 Host Computer
-├── Docker
-│   ├── Game Frontend
-│   ├── Game Backend (Talks to Builder and the Runner container launcher)
-│   ├── Builder
-│   └── Runners (spawned)
-└── Runner container launcher
+└── Docker
+    ├── Game Frontend (Talks to Backend)
+    ├── Game Backend (Talks to Builder, Talks back to Frontend)
+    └── Builder (Compiles small snippets and runs them, Talks back to backend)
 ```
 
 ### Game Frontend (node:alpine)
@@ -27,26 +25,14 @@ Node app.
 
 Manages game.
 
-Communicates with the builder container and the runner launcher.
+Communicates with the builder container sending C code retrieved from a user and also parameters and expects an output.
 
-### Builder (node:latest)
-Node app & GCC.
+### Builder (node:latest) [Already has gcc]
+Node app & gcc.
 
-Gets small snippets of C code.
+Gets small snippets of C code, compiles them and returns the output to the backend.
 
-Should give the output back to the game backend.
-
-### Runners (ubuntu:rolling)
-Ubuntu image.
-
-Run the user's program.
-
-### Runner Launcher (host)
-Node app.
-
-Communicates with the host's docker to launch runners with the user's program.
+Also keeps track of users.
 
 ## Issues / Notes
-* There should also be a way to dockerize the runner launcher.
-* Maybe we could use alpine images for both the buider and the runner (they need to have the same runtime libs).
 * We could diversify the backend runtimes used.
