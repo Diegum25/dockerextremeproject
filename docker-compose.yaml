@@ -1,0 +1,34 @@
+services:
+  frontend:
+    build: 
+      context: frontend
+      args:
+        - EXTREME_FRONTEND_PORT=${EXTREME_FRONTEND_PORT}
+    container_name: extreme_frontend
+    ports:
+      - "${EXTREME_FRONTEND_PORT}:${EXTREME_FRONTEND_PORT}"
+    environment:
+      - EXTREME_FRONTEND_PORT=${EXTREME_FRONTEND_PORT}
+      - EXTREME_BACKEND_PORT=${EXTREME_BACKEND_PORT}
+  backend:
+    build: 
+      context: backend
+      args:
+        - EXTREME_BACKEND_PORT=${EXTREME_BACKEND_PORT}
+    container_name: extreme_backend
+    ports:
+      - "${EXTREME_BACKEND_PORT}:${EXTREME_BACKEND_PORT}"
+    environment:
+      - EXTREME_BACKEND_PORT=${EXTREME_BACKEND_PORT}
+      - EXTREME_BUILDER_PORT=${EXTREME_BUILDER_PORT}
+      - EXTREME_RUNNER_LAUNCHER_PORT=${EXTREME_RUNNER_LAUNCHER_PORT}
+  builder:
+    build: 
+      context: builder
+      args:
+        - EXTREME_BUILDER_PORT=${EXTREME_BUILDER_PORT}
+    container_name: extreme_builder
+    ports:
+      - "${EXTREME_BUILDER_PORT}:${EXTREME_BUILDER_PORT}"
+    environment:
+      - EXTREME_BUILDER_PORT=${EXTREME_BUILDER_PORT}

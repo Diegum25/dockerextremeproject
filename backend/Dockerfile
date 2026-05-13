@@ -1,13 +1,19 @@
-FROM python:alpine
+FROM node:alpine
 
-WORKDIR /www/backend
+WORKDIR /www/app
 
-EXPOSE 5000
+COPY package.json .
+COPY main.js .
 
-COPY . .
+ARG EXTREME_BACKEND_PORT
 
-RUN pip install -r requirements.txt
+ENV EXTREME_BACKEND_PORT=${EXTREME_BACKEND_PORT}
 
-# set up envs
+EXPOSE ${EXTREME_BACKEND_PORT}
 
-CMD flask --app main run -p 5000 -h 0.0.0.0
+COPY main.js .
+COPY package.json .
+
+RUN npm install
+
+CMD npm run run
