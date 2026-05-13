@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = Number(process.env.EXTREME_BUILDER_PORT)
 
 var coolNumber = 0
 
@@ -13,7 +13,7 @@ app.post('/', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Builder listening on port ${port}`)
 })
 
 app.use('/cool',express.static('public'))
