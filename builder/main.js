@@ -1,6 +1,10 @@
+const crypto = require('crypto')
+
+const UUIDS = new Set()
+
 const execa = require('execa');
 
-const express = require('express')
+const express = require('express');
 const app = express()
 var port = Number(process.env.EXTREME_BUILDER_PORT)
 
@@ -13,25 +17,33 @@ if (isNaN(port)){
 
 app.use(express.text())
 
+app.use((req,res,next) => {
+
+  do{
+    req.id = crypto.randomUUID();
+  }while(UUIDS.has(req.id))
+
+  res.on('finish', () => UUIDS.delete(req.id));
+  next();
+})
+
 app.post('/:filename', async(req, res) => {
-  const filename = req.params.filename;
-  console.log(`Receiving file: ${filename}`);
 
-  const gccanswer = await execa.execa("echo",[req.body]).pipe("gcc",["-x", "c", "-"]);
+  let response
 
-  const outgcc = gccanswer.stdout
-  const errgcc = gccanswer.stderr
+  const _ = await execa.execa("gcc",["-x", "c", "-", `-o${req.id}`], { input: req.body}).then(async result =>{    
+    const execanswer = await execa.execa(`./${req.id}`);
 
-  const execanswer = await execa.execa("./a.out");
+    execa.execa("rm",[`./${req.id}`]) // kinda nasty
 
-  const execout = execanswer.stdout
-  const execerr = execanswer.stderr
+    console.log(execanswer.stdout,execanswer.stderr);
 
-  execa.execa("rm",["./a.out"]) // kinda nasty
+    response = {"status": "compiled", "output": {"stdout": execanswer.stdout,"stderr": execanswer.stderr}}
+  }).catch(err => {
+    response = {"status": "failed", "output": {"stdout": err.stdout,"stderr": err.stderr}}
+  });
 
-  console.log(execout,execerr);
-
-  res.send(`{"stdout": "${execout}","stderr": "${execerr}"}\n`);
+  res.send(JSON.stringify(response));
 });
 
 app.listen(port, () => {
