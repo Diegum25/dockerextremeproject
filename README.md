@@ -11,8 +11,10 @@ Code could be rated with both speed of upload and output.
 Host Computer
 └── Docker
     ├── Game Frontend (Talks to Backend)
-    ├── Game Backend (Talks to Builder, Talks back to Frontend)
-    └── Builder (Compiles small snippets and runs them, Talks back to backend)
+    ├── Game Backend (Talks to Builder, Talks back to Frontend, Talks to DB)
+    ├── Builder (Compiles small snippets and runs them, Talks back to backend)
+    └── DB (Talks back to frontend)
+
 ```
 
 ### Game Frontend (node:alpine)
@@ -35,4 +37,4 @@ Gets small snippets of C code, compiles them and returns the output to the backe
 Also keeps track of users.
 
 ## Issues / Notes
-* We could diversify the backend runtimes used.
+* hella vulnerable.

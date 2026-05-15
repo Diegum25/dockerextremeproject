@@ -1,8 +1,11 @@
 # TODO
 - [X] Setup compose (it aint that bad)
 - [X] Setup all ports from a single .env
+- [X] Setup builder
+- [ ] Setup frontend
 - [ ] Setup game backend
 - [ ] Setup builder-backend integration
-- [ ] Make frontend
-- [ ] Integrate a DB somewhere
+- [ ] Setup matches
+- [ ] Make a real frontend
+- [ ] Integrate a DB somewhere and all that stuff
 - [ ] Integrate ai?
