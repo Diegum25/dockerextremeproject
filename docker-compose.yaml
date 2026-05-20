@@ -10,6 +10,7 @@ services:
     environment:
       - EXTREME_FRONTEND_PORT=${EXTREME_FRONTEND_PORT}
       - EXTREME_BACKEND_PORT=${EXTREME_BACKEND_PORT}
+      - EXTREME_HOST_DOCKER=1 # docker check
   backend:
     build: 
       context: backend
@@ -21,6 +22,7 @@ services:
     environment:
       - EXTREME_BACKEND_PORT=${EXTREME_BACKEND_PORT}
       - EXTREME_BUILDER_PORT=${EXTREME_BUILDER_PORT}
+      - EXTREME_HOST_DOCKER=1 # docker check
   builder:
     build: 
       context: builder
@@ -31,3 +33,4 @@ services:
       - "${EXTREME_BUILDER_PORT}:${EXTREME_BUILDER_PORT}"
     environment:
       - EXTREME_BUILDER_PORT=${EXTREME_BUILDER_PORT}
+      - EXTREME_HOST_DOCKER=1 # docker check

@@ -1,0 +1,19 @@
+services:
+  frontend:
+    volumes:
+      # Mount the host frontend directory to the container
+      - ./frontend:/www/frontend
+      # Create an anonymous volume for node_modules to prevent host OS conflicts
+      - /www/frontend/node_modules
+      # Keep the Next.js build cache inside the container
+      - /www/frontend/.next
+
+#  backend:
+#    volumes:
+#      - ./backend:/app
+#      - /app/node_modules
+#
+#  builder:
+#    volumes:
+#      - ./builder:/app
+#      - /app/node_modules

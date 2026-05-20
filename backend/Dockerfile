@@ -16,4 +16,4 @@ COPY package.json .
 
 RUN npm install
 
-CMD npm run run
+CMD npm run dev

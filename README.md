@@ -6,6 +6,23 @@ Project where users compete against other to code small C programs that then run
 
 Code could be rated with both speed of upload and output.
 
+## Running
+### Docker
+```sh
+docker-compose up --build
+```
+
+### Locally
+With npm on each folder.
+
+```sh
+npm install # if you dont have node_modules
+npm run dev
+```
+
+> [!NOTE]  
+> Make sure to set up the variables from or like the .env in the root folder.
+
 ## Container Setup
 ``` pre
 Host Computer

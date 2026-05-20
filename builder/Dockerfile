@@ -17,4 +17,4 @@ EXPOSE ${EXTREME_BUILDER_PORT}
 
 RUN npm install
 
-CMD npm run run
+CMD npm run dev
