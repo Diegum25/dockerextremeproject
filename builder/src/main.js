@@ -29,17 +29,32 @@ app.post('/build', async(req, res) => {
 
   let response
 
-  const _ = await execa.execa("gcc",["-x", "c", "-", `-o${req.id}`], { input: req.body}).then(async result =>{    
-    const execanswer = await execa.execa(`./${req.id}`);
+  try{
+    await execa.execa("gcc",["-x", "c", "-", `-o${req.id}`], { input: req.body}) 
 
-    execa.execa("rm",[`./${req.id}`]) // kinda nasty
+    const execanswer = await execa.execa(`./${req.id}`, { timeout: 5000 });
 
-    response = {"status": "compiled", "output": {"stdout": execanswer.stdout,"stderr": execanswer.stderr}}
-    console.log(response)
-  }).catch(err => {
-    response = {"status": "failed", "output": {"stdout": err.stdout,"stderr": err.stderr}}
-    console.log(response)
-  });
+    response = {
+      "status": "compiled",
+      "output": {"stdout": execanswer.stdout,"stderr": execanswer.stderr}
+    }
+
+  }catch(err){
+
+    if (err.timedOut){
+      response = {
+        "status": "timed out",
+        "output": {"stdout": err.stdout || "Took too long","stderr": err.stderr}
+      }
+    }else{
+      response = {
+        "status": "failed",
+        "output": {"stdout": err.stdout, "stderr": err.stderr}
+      }
+    }
+  }finally{
+    execa.execa("rm",[`./${req.id}`]).catch(() => {}) // kinda nasty
+  };
 
   res.send(JSON.stringify(response));
 });

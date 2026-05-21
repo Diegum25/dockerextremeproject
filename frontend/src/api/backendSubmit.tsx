@@ -12,7 +12,7 @@ export async function submitCodeToBackend(formData : FormData) {
 
     const response = await fetch(backend+"/code",{method:'POST',body:code,headers:[['content-type','text/plain']]})
 
-    const responseData = await response.json() // It is not a json yet
+    const responseData = await response.json()
 
     return responseData
 }
