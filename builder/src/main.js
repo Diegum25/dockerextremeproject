@@ -10,9 +10,7 @@ var port = Number(process.env.EXTREME_BUILDER_PORT)
 
 if (isNaN(port)){
   console.error(`Port is NaN!\nSet EXTREME_BUILDER_PORT to something`)
-  console.log('Using port 2167')
-
-  port = 2167
+  process.exit(1)
 }
 
 app.use(express.text())
@@ -27,7 +25,7 @@ app.use((req,res,next) => {
   next();
 })
 
-app.post('/:filename', async(req, res) => {
+app.post('/build', async(req, res) => {
 
   let response
 
@@ -36,11 +34,11 @@ app.post('/:filename', async(req, res) => {
 
     execa.execa("rm",[`./${req.id}`]) // kinda nasty
 
-    console.log(execanswer.stdout,execanswer.stderr);
-
     response = {"status": "compiled", "output": {"stdout": execanswer.stdout,"stderr": execanswer.stderr}}
+    console.log(response)
   }).catch(err => {
     response = {"status": "failed", "output": {"stdout": err.stdout,"stderr": err.stderr}}
+    console.log(response)
   });
 
   res.send(JSON.stringify(response));

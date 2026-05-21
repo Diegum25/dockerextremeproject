@@ -16,7 +16,14 @@ export default function CodeSubmit(){
 
         const response = await submitCodeToBackend(formData);
 
-        textSetter(response)
+        const stdout = response.output.stdout
+        const stderr = response.output.stderr
+
+        if (response.status != "compiled"){
+            textSetter(stderr)
+        }else{
+            textSetter(stdout)
+        }
     }
 
     return(

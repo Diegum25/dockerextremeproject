@@ -4,10 +4,10 @@ RUN apt-get update
 
 RUN apt-get upgrade -y
 
-WORKDIR /builder
+WORKDIR /www/builder
 
 COPY package.json .
-COPY main.js .
+COPY src/ src/
 
 ARG EXTREME_BUILDER_PORT
 
