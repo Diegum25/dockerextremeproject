@@ -23,6 +23,9 @@ npm run dev
 > [!NOTE]  
 > Make sure to set up the variables from or like the .env in the root folder.
 
+> [!NOTE]  
+> Make sure to place the game at frontend/public/godot-game.
+
 ## Container Setup
 ``` pre
 Host Computer
