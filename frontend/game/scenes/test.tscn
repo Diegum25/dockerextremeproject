@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cs6gxsec3ngxq"]
+
+[ext_resource type="Script" uid="uid://brmt1rpcr5unk" path="res://scripts/rotate.gd" id="1_errlg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bl13t"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_errlg"]
+
+[sub_resource type="Sky" id="Sky_bl13t"]
+sky_material = SubResource("ProceduralSkyMaterial_errlg")
+
+[sub_resource type="Environment" id="Environment_iyx0m"]
+background_mode = 2
+sky = SubResource("Sky_bl13t")
+
+[node name="Node3D" type="Node3D" unique_id=1816906085]
+transform = Transform3D(1, 0, 0, 0, 0.08592115, 0.99630195, 0, -0.99630195, 0.08592115, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=230520466]
+mesh = SubResource("BoxMesh_bl13t")
+script = ExtResource("1_errlg")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1258740669]
+transform = Transform3D(1, 0, 0, 0, -4.4703484e-08, -1, 0, 1, -4.4703484e-08, 0, -1.9926044, 0.17184229)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1440009656]
+environment = SubResource("Environment_iyx0m")

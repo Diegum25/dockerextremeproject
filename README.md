@@ -34,10 +34,10 @@ Host Computer
 
 ```
 
-### Game Frontend (node:alpine)
+### Game Frontend (archlinux -> node:alpine)
 Next app.
 
-Possible integration of local C server.
+Game made with godot.
 
 ### Game Backend (node:alpine)
 Node app.
