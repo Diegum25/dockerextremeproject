@@ -1,11 +1,19 @@
 const express = require('express')
+const ws = require("ws")
+
 const app = express()
-const port = Number(process.env.EXTREME_BACKEND_PORT)
+const apiPort = Number(process.env.EXTREME_BACKEND_PORT)
+const webPort = Number(process.env.EXTREME_BACKEND_WS_PORT)
 
 app.use(express.text())
 
-if (isNaN(port)){
+if (isNaN(apiPort)){
   console.error(`Port is NaN!\nSet EXTREME_BACKEND_PORT to something`)
+  process.exit(1)
+}
+
+if (isNaN(webPort)){
+  console.error(`Port is NaN!\nSet EXTREME_BACKEND_WS_PORT to something`)
   process.exit(1)
 }
 
@@ -30,6 +38,42 @@ app.post('/code', async (req, res) => {
   res.send(responseData)
 })
 
-app.listen(port, () => {
-  console.log(`Backend listening on port ${port}`)
+app.listen(apiPort, () => {
+  console.log(`Backend listening on port ${apiPort}`)
+})
+
+// socket stuff
+
+const socketServer = new ws.WebSocketServer({port: webPort})
+console.log(`WebSocket server is running on port ${webPort}`);
+
+var messages = [];
+
+socketServer.on('connection',(ws)=>{
+  console.log("Connected")
+
+  ws.send('Welcome to the pure Node WebSocket server!');
+
+  // 3. Listen for messages coming from the client
+  ws.on('message', (data) => {
+    messages.push(data)
+
+    dataStr = data.toString()
+    console.log(dataStr);
+
+    const response = {
+      "messages" : dataStr
+    }
+    
+    socketServer.clients.forEach((client)=>{
+      if (client.OPEN){
+        client.send(JSON.stringify(response));
+      }
+    })
+
+  });
+
+  ws.on('close',()=>{
+    console.log("Disconnected")
+  })
 })
