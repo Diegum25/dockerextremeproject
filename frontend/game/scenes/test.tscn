@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cs6gxsec3ngxq"]
 
 [ext_resource type="Script" uid="uid://brmt1rpcr5unk" path="res://scripts/rotate.gd" id="1_errlg"]
+[ext_resource type="Script" uid="uid://r2holwt4e01x" path="res://scripts/freecamera.gd" id="2_bl13t"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_bl13t"]
 
@@ -20,8 +21,10 @@ transform = Transform3D(1, 0, 0, 0, 0.08592115, 0.99630195, 0, -0.99630195, 0.08
 mesh = SubResource("BoxMesh_bl13t")
 script = ExtResource("1_errlg")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1258740669]
-transform = Transform3D(1, 0, 0, 0, -4.4703484e-08, -1, 0, 1, -4.4703484e-08, 0, -1.9926044, 0.17184229)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1440009656]
 environment = SubResource("Environment_iyx0m")
+
+[node name="FreeLookCamera" type="Camera3D" parent="." unique_id=94144197]
+transform = Transform3D(1, 0, 0, 0, -4.4703484e-08, -1, 0, 1, -4.4703484e-08, 0, -1.9926039, 0.1718423)
+script = ExtResource("2_bl13t")
+metadata/_custom_type_script = "uid://r2holwt4e01x"

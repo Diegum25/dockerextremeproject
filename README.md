@@ -12,6 +12,10 @@ Code could be rated with both speed of upload and output.
 docker-compose up --build
 ```
 
+Thats it.
+
+There are other yaml that you can use in conjuction with the main one to set up volumes so you dont have to rebuild every time.
+
 ### Locally
 With npm on each folder.
 
