@@ -2,8 +2,30 @@
 
 [ext_resource type="Script" uid="uid://brmt1rpcr5unk" path="res://scripts/rotate.gd" id="1_errlg"]
 [ext_resource type="Script" uid="uid://r2holwt4e01x" path="res://scripts/freecamera.gd" id="2_bl13t"]
+[ext_resource type="Script" uid="uid://byx1vsvxr25j4" path="res://scripts/whereami.gd" id="4_74lek"]
+[ext_resource type="Script" uid="uid://bqqknq0giwaai" path="res://scripts/wstest2.gd" id="4_j5jx5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_74lek"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.05
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5jx5"]
+next_pass = SubResource("StandardMaterial3D_74lek")
+grow_amount = 3.478
+stencil_mode = 1
+stencil_flags = 2
+stencil_outline_thickness = 0.05
 
 [sub_resource type="BoxMesh" id="BoxMesh_bl13t"]
+material = SubResource("StandardMaterial3D_j5jx5")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_errlg"]
 
@@ -15,7 +37,6 @@ background_mode = 2
 sky = SubResource("Sky_bl13t")
 
 [node name="Node3D" type="Node3D" unique_id=1816906085]
-transform = Transform3D(1, 0, 0, 0, 0.08592115, 0.99630195, 0, -0.99630195, 0.08592115, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=230520466]
 mesh = SubResource("BoxMesh_bl13t")
@@ -25,6 +46,20 @@ script = ExtResource("1_errlg")
 environment = SubResource("Environment_iyx0m")
 
 [node name="FreeLookCamera" type="Camera3D" parent="." unique_id=94144197]
-transform = Transform3D(1, 0, 0, 0, -4.4703484e-08, -1, 0, 1, -4.4703484e-08, 0, -1.9926039, 0.1718423)
+transform = Transform3D(1, 0, 0, 0, 1, -9.920953e-10, 0, 9.920953e-10, 1, 0, 0.007396102, 2.1718423)
 script = ExtResource("2_bl13t")
 metadata/_custom_type_script = "uid://r2holwt4e01x"
+
+[node name="env" type="Label3D" parent="." unique_id=575852538]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5529491, 1.0859212)
+text = "hello"
+script = ExtResource("4_74lek")
+
+[node name="ws" type="Label3D" parent="env" unique_id=1674969722]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+text = "hello2"
+script = ExtResource("4_j5jx5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1703005072]
+transform = Transform3D(0.9659258, -0.0669873, 0.25, -0.25881907, -0.25000003, 0.9330128, 0, -0.96592593, -0.25881907, 2, 4, -2)
+shadow_enabled = true

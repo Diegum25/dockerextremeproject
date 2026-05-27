@@ -38,6 +38,10 @@ app.post('/code', async (req, res) => {
   res.send(responseData)
 })
 
+app.get('/test',(req,res) => {
+  res.send("HI")
+})
+
 app.listen(apiPort, () => {
   console.log(`Backend listening on port ${apiPort}`)
 })
@@ -52,17 +56,16 @@ var messages = [];
 socketServer.on('connection',(ws)=>{
   console.log("Connected")
 
-  ws.send('Welcome to the pure Node WebSocket server!');
+  ws.send('You are connected!');
 
   // 3. Listen for messages coming from the client
   ws.on('message', (data) => {
-    messages.push(data)
-
     dataStr = data.toString()
     console.log(dataStr);
+    messages.push(dataStr)
 
     const response = {
-      "messages" : dataStr
+      "messages" : messages
     }
     
     socketServer.clients.forEach((client)=>{

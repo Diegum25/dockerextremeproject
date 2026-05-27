@@ -21,6 +21,14 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/dpi/allow_hidpi=false
 
+[file_customization]
+
+folder_colors={
+"res://build/": "gray",
+"res://scenes/": "purple",
+"res://scripts/": "green"
+}
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

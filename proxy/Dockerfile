@@ -1,0 +1,9 @@
+FROM caddy:alpine
+
+ARG EXTREME_PROXY_PORT
+
+ENV EXTREME_PROXY_PORT=${EXTREME_PROXY_PORT}
+
+EXPOSE ${EXTREME_PROXY_PORT}
+
+COPY Caddyfile /etc/caddy/Caddyfile

@@ -1,3 +1,4 @@
+# have to clean this whole env vars mess
 services:
   frontend:
     build: 
@@ -37,3 +38,21 @@ services:
     environment:
       - EXTREME_BUILDER_PORT=${EXTREME_BUILDER_PORT}
       - EXTREME_HOST_DOCKER=1 # docker check
+  proxy:
+    build:
+      context: proxy
+      args:
+        - EXTREME_PROXY_PORT=${EXTREME_PROXY_PORT}
+    container_name: extreme_proxy
+    ports:
+      - "${EXTREME_PROXY_PORT}:${EXTREME_PROXY_PORT}"
+    environment:
+      - EXTREME_PROXY_PORT=${EXTREME_PROXY_PORT}
+      - EXTREME_FRONTEND_PORT=${EXTREME_FRONTEND_PORT}
+      - EXTREME_BACKEND_PORT=${EXTREME_BACKEND_PORT}
+      - EXTREME_BACKEND_WS_PORT=${EXTREME_BACKEND_WS_PORT}
+      - EXTREME_HOST_DOCKER=1 # docker check
+    depends_on:
+      - frontend
+      - backend
+      - builder

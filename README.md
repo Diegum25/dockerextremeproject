@@ -30,6 +30,14 @@ npm run dev
 > [!NOTE]  
 > Make sure to place the game at frontend/public/godot-game.
 
+## Tunneling
+
+An https connection is required for a client to connect.
+
+```sh
+npx cloudflared tunnel --url http://localhost:$EXTREME_PROXY_PORT
+```
+
 ## Container Setup
 ``` pre
 Host Computer
