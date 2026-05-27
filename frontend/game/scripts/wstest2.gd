@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 
 func browser():
 	var host = String(JavaScriptBridge.eval("window.location.origin"))
-	var wshost = "ws"+host.lstrip('https')
+	var wshost = "wss"+host.lstrip('https')
 	
 	self.text = "at %s
 	connecting to %s" % [host, wshost]
@@ -28,3 +28,9 @@ func browser():
 func machine():
 	self.text = "hi idk how to set the frontend env variable for this thing
 	but i can do this %s" % OS.get_environment("HOME")
+	labelSon = SocketTest.new()
+	
+	labelSon.websocket_url = 'ws://localhost:4001/' # this is the exposed local ws
+	labelSon.position.y -= 0.5
+	
+	self.add_child(labelSon)

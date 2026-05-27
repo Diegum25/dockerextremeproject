@@ -1,4 +1,4 @@
-:{$EXTREME_PROXY_PORT} {
+localhost:{$EXTREME_PROXY_PORT} {
     handle_path /api/http/* {
         reverse_proxy backend:{$EXTREME_BACKEND_PORT}
     }
