@@ -1,13 +1,13 @@
 # Online code race thing
 
-## New Idea
+## Idea
 
 Project where users compete against other to code small C programs that then run on a container with a specific input and a desired output.
 
 Code could be rated with both speed of upload and output.
 
 ## Running
-Edit `CLOUDFLARED_TOKEN` and `CLOUDFLARED_DOMAIN` in `.env` to your cloudflared token and website domain.
+Edit `CLOUDFLARED_TOKEN` and `CLOUDFLARED_DOMAIN` in `.env` to your cloudflared token and website domain. Or you could ask me for mine.
 
 ```pre
 # Cloudflared tunnel token
@@ -31,16 +31,19 @@ There are other yaml that you can use in conjuction with the main one to set up 
 ``` pre
 Host Computer
 └── Docker
+    ├── Tunnel (Exposes Proxy to the www)
     ├── Proxy (Exposes Frontend & Backend)
     ├── Game Frontend (Client talks to Backend)
     ├── Game Backend (Talks to Builder, Talks back to Frontend client, Talks to DB)
     ├── Builder (Compiles small snippets and runs them, Talks back to backend)
     └── DB (Talks back to backend) (Not implemented yet)
-
 ```
 
+### Tunnel (cloudflare/cloudflared:latest)
+Cloudflared tunnel.
+
 ### Proxy (caddy:alpine)
-Caddy proxy
+Caddy proxy.
 
 ### Game Frontend (archlinux:latest -> node:alpine)
 Next app.
