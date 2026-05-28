@@ -2,9 +2,13 @@ services:
   frontend:
     volumes:
       - ./frontend/src:/www/frontend/src
+      - ./frontend/next.config.ts:/www/frontend/next.config.ts
   backend:
     volumes:
       - ./backend/src:/www/backend/src
   builder:
     volumes:
       - ./builder/src:/www/builder/src
+  proxy:
+    volumes:
+      - ./proxy/Caddyfile:/etc/caddy/Caddyfile

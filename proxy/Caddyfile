@@ -1,0 +1,11 @@
+:{$EXTREME_PROXY_PORT} {
+    handle_path /api/http/* {
+        reverse_proxy backend:{$EXTREME_BACKEND_PORT}
+    }
+
+    handle_path /api/ws/* {
+        reverse_proxy backend:{$EXTREME_BACKEND_WS_PORT}
+    }
+    
+    reverse_proxy /* frontend:{$EXTREME_FRONTEND_PORT}
+}

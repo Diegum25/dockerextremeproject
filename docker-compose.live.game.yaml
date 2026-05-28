@@ -1,0 +1,5 @@
+# from build inside of the game folder. no need to copy game to the share folder.
+services:
+  frontend:
+    volumes:
+      - ./frontend/game/build:/www/frontend/public/godot-game
