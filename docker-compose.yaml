@@ -6,12 +6,12 @@ services:
       args:
         - EXTREME_FRONTEND_PORT=${EXTREME_FRONTEND_PORT}
     container_name: extreme_frontend
-    ports:
-      - "${EXTREME_FRONTEND_PORT}:${EXTREME_FRONTEND_PORT}"
     environment:
       - EXTREME_FRONTEND_PORT=${EXTREME_FRONTEND_PORT}
+      - EXTREME_FRONTEND_MODE=${EXTREME_FRONTEND_MODE}
       - EXTREME_BACKEND_PORT=${EXTREME_BACKEND_PORT}
       - EXTREME_BACKEND_WS_PORT=${EXTREME_BACKEND_WS_PORT}
+      - CLOUDFLARED_DOMAIN=${CLOUDFLARED_DOMAIN}
       - EXTREME_HOST_DOCKER=1 # docker check
   backend:
     build: 
@@ -19,9 +19,6 @@ services:
       args:
         - EXTREME_BACKEND_PORT=${EXTREME_BACKEND_PORT}
     container_name: extreme_backend
-    ports:
-      - "${EXTREME_BACKEND_PORT}:${EXTREME_BACKEND_PORT}"
-      - "${EXTREME_BACKEND_WS_PORT}:${EXTREME_BACKEND_WS_PORT}"
     environment:
       - EXTREME_BACKEND_PORT=${EXTREME_BACKEND_PORT}
       - EXTREME_BACKEND_WS_PORT=${EXTREME_BACKEND_WS_PORT}
@@ -33,8 +30,6 @@ services:
       args:
         - EXTREME_BUILDER_PORT=${EXTREME_BUILDER_PORT}
     container_name: extreme_builder
-    ports:
-      - "${EXTREME_BUILDER_PORT}:${EXTREME_BUILDER_PORT}"
     environment:
       - EXTREME_BUILDER_PORT=${EXTREME_BUILDER_PORT}
       - EXTREME_HOST_DOCKER=1 # docker check
@@ -44,8 +39,6 @@ services:
       args:
         - EXTREME_PROXY_PORT=${EXTREME_PROXY_PORT}
     container_name: extreme_proxy
-    ports:
-      - "${EXTREME_PROXY_PORT}:${EXTREME_PROXY_PORT}"
     environment:
       - EXTREME_PROXY_PORT=${EXTREME_PROXY_PORT}
       - EXTREME_FRONTEND_PORT=${EXTREME_FRONTEND_PORT}
@@ -56,3 +49,11 @@ services:
       - frontend
       - backend
       - builder
+  tunnel:
+    image: cloudflare/cloudflared:latest
+    container_name: extreme_tunnel
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARED_TOKEN}
+    depends_on:
+      - proxy

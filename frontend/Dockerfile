@@ -20,6 +20,7 @@ WORKDIR /www/frontend
 ARG EXTREME_FRONTEND_PORT
 
 ENV EXTREME_FRONTEND_PORT=${EXTREME_FRONTEND_PORT}
+ENV NEXT_TELEMETRY_DISABLED=1
 
 EXPOSE ${EXTREME_FRONTEND_PORT}
 
@@ -31,8 +32,8 @@ COPY next.config.ts .
 COPY package.json .
 COPY postcss.config.mjs .
 COPY tsconfig.json .
-
+COPY run.sh .
 
 RUN npm install
 
-CMD npm run dev
+CMD sh run.sh

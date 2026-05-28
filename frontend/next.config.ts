@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins:[String(process.env.CLOUDFLARED_DOMAIN)],
   async headers() {
     return [
       {

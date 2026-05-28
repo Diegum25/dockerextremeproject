@@ -7,6 +7,20 @@ Project where users compete against other to code small C programs that then run
 Code could be rated with both speed of upload and output.
 
 ## Running
+Edit `CLOUDFLARED_TOKEN` and `CLOUDFLARED_DOMAIN` in `.env` to your cloudflared token and website domain.
+
+```pre
+# Cloudflared tunnel token
+
+CLOUDFLARED_TOKEN=yourtoken
+
+# Your domain
+
+CLOUDFLARED_DOMAIN=yourdomain.com
+```
+
+Then to build and run the containers use docker compose.
+
 ```sh
 docker-compose up --build
 ```
@@ -49,3 +63,5 @@ Also keeps track of users.
 
 ## Issues / Notes
 * hella vulnerable.
+* Frontend always takes a long time to compile, and its not the game's fault.
+* Nodemon crash doesn't stop the service.
