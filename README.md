@@ -22,7 +22,7 @@ CLOUDFLARED_DOMAIN=yourdomain.com
 Then to build and run the containers use docker compose.
 
 ```sh
-docker-compose up --build
+docker-compose -f docker-compose.yaml -f docker-compose.tunnel.yaml up --build
 ```
 
 There are other yaml that you can use in conjuction with the main one to set up volumes so you dont have to rebuild every time.
@@ -68,3 +68,4 @@ Also keeps track of users.
 * hella vulnerable.
 * Frontend always takes a long time to compile, and its not the game's fault.
 * Nodemon crash doesn't stop the service.
+* Everything is being run as root

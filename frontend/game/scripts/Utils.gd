@@ -5,10 +5,18 @@ enum GameClient {
 	COMPUTER
 }
 
-static func whereAmI() -> String:
+static func getWebSocket() -> String:
 	if(OS.has_feature("web")):
 		var host = String(JavaScriptBridge.eval("window.location.origin"))
-		return "wss"+host.lstrip('https')
+		
+		var prefix : String
+		
+		if (host.begins_with("https")):
+			prefix = "wss"
+		else:
+			prefix = "ws"
+		
+		return prefix+host.lstrip('https')+"/api/ws/"
 	else:
 		return 'ws://localhost:4001/'
 

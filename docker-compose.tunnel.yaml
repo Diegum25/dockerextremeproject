@@ -1,0 +1,9 @@
+services:
+  tunnel:
+      image: cloudflare/cloudflared:latest
+      container_name: extreme_tunnel
+      command: tunnel --no-autoupdate run
+      environment:
+        - TUNNEL_TOKEN=${CLOUDFLARED_TOKEN}
+      depends_on:
+        - proxy
