@@ -9,7 +9,7 @@ Code could be rated with both speed of upload and output.
 ## Running
 Edit `CLOUDFLARED_TOKEN` and `CLOUDFLARED_DOMAIN` in `.env` to your cloudflared token and website domain. Or you could ask me for mine.
 
-```pre
+```sh
 # Cloudflared tunnel token
 
 CLOUDFLARED_TOKEN=yourtoken
@@ -23,6 +23,12 @@ Then to build and run the containers use docker compose.
 
 ```sh
 docker-compose -f docker-compose.yaml -f docker-compose.tunnel.yaml up --build
+```
+
+Or to test locally.
+
+```sh
+docker-compose up --build
 ```
 
 There are other yaml that you can use in conjuction with the main one to set up volumes so you dont have to rebuild every time.

@@ -1,10 +1,6 @@
 FROM caddy:builder
 
-RUN xcaddy build --with github.com/caddy-dns/cloudflare
-
-ARG EXTREME_PROXY_PORT
-
-ENV EXTREME_PROXY_PORT=${EXTREME_PROXY_PORT}
+RUN xcaddy build --with github.com/mholt/caddy-l4
 
 EXPOSE ${EXTREME_PROXY_PORT}
 

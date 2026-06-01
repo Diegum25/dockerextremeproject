@@ -1,3 +1,15 @@
+{
+    layer4 {
+        udp/:{$EXTREME_PROXY_PORT} {
+            route {
+                proxy {
+                    upstream udp/backend:{$EXTREME_BACKEND_UDP_PORT}
+                }
+            }
+        }
+    }
+}
+
 :{$EXTREME_PROXY_PORT} {
     handle_path /api/http/* {
         reverse_proxy backend:{$EXTREME_BACKEND_PORT}
