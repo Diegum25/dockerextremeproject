@@ -16,9 +16,9 @@ static func getWebSocket() -> String:
 		else:
 			prefix = "ws"
 		
-		return prefix+host.lstrip('https')+"/api/ws/"
+		return prefix+host.lstrip('https')+"/api/http/"
 	else:
-		return 'ws://localhost:4001/'
+		return 'ws://localhost:4030/api/http/'
 
 static func getGameClient() -> GameClient:
 	if(OS.has_feature("web")):

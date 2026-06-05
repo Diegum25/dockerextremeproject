@@ -21,12 +21,17 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/dpi/allow_hidpi=false
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/func_godot/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
 "res://build/": "gray",
 "res://scenes/": "purple",
-"res://scripts/": "green"
+"res://scripts/": "green",
+"res://shaders/": "blue"
 }
 
 [physics]

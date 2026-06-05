@@ -6,7 +6,7 @@ export default async function page(){
 
     if (gameExists){
         return(<>
-            <iframe src="/godot-game/game.html" title="godot game" allow="autoplay; fullscreen; xr-spatial-tracking" className="h-screen w-screen"></iframe>
+            <iframe src="/godot-game/index.html" title="godot game" allow="autoplay; fullscreen; xr-spatial-tracking" className="h-screen w-screen"></iframe>
         </>)
     }else{
         return(<>

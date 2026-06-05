@@ -51,7 +51,7 @@ Cloudflared tunnel.
 ### Proxy (caddy:alpine)
 Caddy proxy.
 
-### Game Frontend (archlinux:latest -> node:alpine)
+### Game Frontend (barichello/godot-ci:latest -> node:alpine)
 Next app.
 
 Game made with godot.
@@ -59,9 +59,7 @@ Game made with godot.
 ### Game Backend (node:alpine)
 Node app.
 
-Manages game.
-
-Communicates with the builder container sending C code retrieved from a user and also parameters and expects an output.
+Manages game with websockets.
 
 ### Builder (node:latest) [Already has gcc]
 Node app & gcc.

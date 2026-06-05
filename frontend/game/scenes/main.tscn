@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://cs6gxsec3ngxq"]
+
+[ext_resource type="PackedScene" uid="uid://c1poeoprus1sv" path="res://scenes/menus.tscn" id="2_sugp2"]
+[ext_resource type="Shader" uid="uid://cw83ohcawq6l" path="res://shaders/Screen.gdshader" id="2_tbgi4"]
+[ext_resource type="Script" uid="uid://b03oes302uei4" path="res://scripts/viewportsize.gd" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://7qlx1aw1rhu5" path="res://scripts/manager.gd" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://bnkav2dl03njj" path="res://scripts/world.gd" id="4_tefeu"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sugp2"]
+viewport_path = NodePath("3DWorld/WorldVP")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
+resource_local_to_scene = true
+shader = ExtResource("2_tbgi4")
+shader_parameter/Scene = SubResource("ViewportTexture_sugp2")
+
+[sub_resource type="QuadMesh" id="QuadMesh_tbgi4"]
+size = Vector2(100, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tefeu"]
+data = PackedVector3Array(50, -50, 0, -50, -50, 0, 50, 50, 0, -50, -50, 0, -50, 50, 0, 50, 50, 0)
+
+[node name="Root" type="Node2D" unique_id=232590062]
+
+[node name="Screen" type="CanvasLayer" parent="." unique_id=1810502834]
+
+[node name="3DScene" type="ColorRect" parent="Screen" unique_id=1220066364]
+material = SubResource("ShaderMaterial_tefeu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Menu" parent="Screen" unique_id=1705780421 node_paths=PackedStringArray("manager") instance=ExtResource("2_sugp2")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+manager = NodePath("../../Manager")
+
+[node name="3DWorld" type="Node" parent="." unique_id=6416977]
+
+[node name="WorldVP" type="SubViewport" parent="3DWorld" unique_id=1191890696 node_paths=PackedStringArray("rect")]
+editor_description = "Hi
+I think there can only be 1 of these 3d scenes"
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(384, 216)
+render_target_update_mode = 4
+script = ExtResource("4_jyhfs")
+rect = NodePath("../../Screen/3DScene")
+
+[node name="Camera" type="Camera3D" parent="3DWorld/WorldVP" unique_id=840300148]
+transform = Transform3D(1, 0, 0, 0, 1, -9.920953e-10, 0, 9.920953e-10, 1, 0, 2.0073962, 2.1718423)
+current = true
+
+[node name="World" type="Node3D" parent="3DWorld" unique_id=923477780 node_paths=PackedStringArray("manager")]
+script = ExtResource("4_tefeu")
+manager = NodePath("../../Manager")
+metadata/_custom_type_script = "uid://bnkav2dl03njj"
+
+[node name="Entities" type="Node" parent="3DWorld/World" unique_id=1450105815]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="3DWorld/World" unique_id=304195275]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DWorld/World/StaticBody3D" unique_id=2018130465]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_tbgi4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DWorld/World/StaticBody3D" unique_id=2036772841]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_tefeu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="3DWorld/World" unique_id=1971232407]
+transform = Transform3D(0.9659258, -0.066987306, -0.25, 0.25881904, 0.25000003, 0.93301266, 0, -0.9659258, 0.25881907, 0, 2, 0)
+shadow_enabled = true
+
+[node name="Manager" type="Node" parent="." unique_id=248217690 node_paths=PackedStringArray("mainMenu", "world")]
+script = ExtResource("4_tbgi4")
+mainMenu = NodePath("../Screen/Menu")
+world = NodePath("../3DWorld/World")
+metadata/_custom_type_script = "uid://7qlx1aw1rhu5"

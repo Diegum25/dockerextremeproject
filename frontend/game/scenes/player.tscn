@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dkbclnga0wnxt"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_3vyb7"]
+size = Vector3(1, 0.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g2els"]
+size = Vector3(1, 2, 1)
+
+[node name="Player" type="CharacterBody3D" unique_id=1165301656]
+
+[node name="body" type="MeshInstance3D" parent="." unique_id=1096747738]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_u8vuu")
+
+[node name="hat" type="MeshInstance3D" parent="." unique_id=1477294367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("PrismMesh_3vyb7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1501847450]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_g2els")

@@ -1,15 +1,15 @@
 # godot game
 
-FROM archlinux as game
+FROM barichello/godot-ci:latest as game
 
 WORKDIR /www/game
 
-RUN pacman -Sy godot --noconfirm
-
 COPY game/ .
 
+RUN mkdir ./build
+
 # wow what the hell
-CMD godot --headless --export-release "Web"
+RUN godot --headless --export-release "Web" "./build/index.html"
 
 # frontend
 
